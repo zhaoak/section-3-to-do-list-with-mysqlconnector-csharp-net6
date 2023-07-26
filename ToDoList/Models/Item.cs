@@ -8,6 +8,11 @@ namespace ToDoList.Models
     public string Description { get; set; }
     public int ItemId{ get; set; }
 
+    public Item()
+    {
+      Description = "";
+    }
+
     public Item(string description)
     {
       Description = description;
