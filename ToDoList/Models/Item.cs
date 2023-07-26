@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using MySqlConnector;
 
 namespace ToDoList.Models
 {
@@ -8,20 +7,8 @@ namespace ToDoList.Models
     public string Description { get; set; }
     public int ItemId{ get; set; }
 
-    public Item()
-    {
-      Description = "";
-    }
-
-    public Item(string description)
-    {
-      Description = description;
-    }
-    public Item(string description, int id)
-    {
-      Description = description;
-      ItemId = id;
-    }
+    public int CategoryId { get; set; }
+    public Category Category { get; set; }
 
     public override bool Equals(System.Object otherItem)
     {

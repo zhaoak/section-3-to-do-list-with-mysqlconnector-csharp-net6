@@ -3,6 +3,7 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using ToDoList.Models;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace ToDoList.Controllers
 {
@@ -32,6 +33,14 @@ namespace ToDoList.Controllers
       _db.Categories.Add(category);
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    public ActionResult Details(int id)
+    {
+      Category thisCategory = _db.Categories
+                                  .Include(category => category.Items)
+                                  .FirstOrDefault(category => category.CategoryId == id);
+      return View(thisCategory);
     }
     /* [HttpGet("/categories")] */
     /* public ActionResult Index() */

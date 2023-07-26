@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ToDoList.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,10 @@ namespace ToDoList.Controllers
 
     public ActionResult Index()
     {
-      List<Item> model = _db.Items.ToList();
+      // get a list of items from the DB, plus the category each belongs to
+      List<Item> model = _db.Items
+                            .Include(item => item.Category)
+                            .ToList();
       return View(model);
     }
 
