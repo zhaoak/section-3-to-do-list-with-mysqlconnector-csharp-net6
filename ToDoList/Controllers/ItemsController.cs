@@ -35,8 +35,24 @@ namespace ToDoList.Controllers
 
     public ActionResult Details(int id)
     {
+      // queries the _db object's items list, finds the first that matches 
+      // relevant id, then returns that item
       Item thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
       return View(thisItem);
+    }
+    
+    public ActionResult Edit(int id)
+    {
+      Item thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
+      return View(thisItem);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Item item)
+    {
+      _db.Items.Update(item);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
   }
 }
